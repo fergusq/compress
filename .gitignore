@@ -1,0 +1,8 @@
+*.times
+*.gtimes
+*.compressed
+*.gcompressed
+*.uncompressed
+compress
+decompress
+.vscode

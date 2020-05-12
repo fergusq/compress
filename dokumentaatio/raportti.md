@@ -42,6 +42,17 @@ Pakattu tavujono:
 	4. Viittaus viittaa siis tavujonoon `kissa koira`.
 4. Lopussa on literaali `0a` eli uusi rivi.
 
+## Ohjelman kääntäminen ja suorittaminen
+
+Ohjelman voi kääntää komennolla
+
+	make all
+
+Tämän jälkeen tiedoston voi pakata ja purkaa
+
+	./compress tiedosto >tiedosto.paketti
+	./decompress tiedosto.paketti >tiedosto.pakkaamaton
+
 ## Testaus
 
 ### Testidata
@@ -49,6 +60,12 @@ Pakattu tavujono:
 Testidatana käytettiin Semanttinen Finlex -sivulta ladattua 3921 tiedostoa, jotka sisältävät vuonna 2000 Suomessa säädetyt lait. Tiedostot ovat XML-muotoisia, ja niiden yhteenlaskettu koko on 15,4 Mt.
 
 Koska satunnaisissa tiedostoissa ei ole rakenentta, niiden ei oleteta pakkautuvan mitenkään.
+
+### Testien ajaminen
+
+Testit voi ajaa komennolla
+
+	make test
 
 ### Oikeellisuuden testaus
 

@@ -8,3 +8,5 @@ Tämä on takautuva raportti ensimmäisen viikon tilanteesta.
 - Kirjoitin määritysdokumentin.
 - Kirjoitin testausdokumentin.
 - Kirjoitin käyttöohjeet.
+
+Käytin aikaa n. 3 tuntia.

@@ -42,7 +42,34 @@ Pakattu tavujono:
 	4. Viittaus viittaa siis tavujonoon `kissa koira`.
 4. Lopussa on literaali `0a` eli uusi rivi.
 
-## Ohjelman kääntäminen ja suorittaminen
+## Toteutus
+
+### Ohjelman rakenne
+
+Projekti koostuu itse asiassa kahdesta ohjelmasta, pakkaajasta ja purkajasta. Kumpikin ohjelma on toteutettu C:llä, ja niistä kumpikin lukee argumenttina annetun tiedoston, ja tulostaa standardiulostuloon pakatun/puretun lopputuloksen.
+
+Kummankin ohjelman koodi on kattavasti kommentoitu.
+
+#### Pakkaava ohjelma
+
+- Pakkaava ohjelma lukee tiedoston tavu kerrallaan. 
+- Jokaiselle tavulle tarkistetaan, onko se esiintynyt aiemmin (tiettyyn rajaan saakka, jota kutsutaan ympäristön kooksi). Jos tavu on esiintynyt ympäristössä, tarkistetaan moniko seuraava tavu esiintyy vastaavissa kohdissa ympäristössä.
+  - Jos tämä määrä on suurempi kuin 5 (viittauksen minimikoko), tulostetaan tavujen sijasta viittaus (kuten määrityksessä on määritelty).
+  - Muussa tapauksessa tulostetaan tavu tai, jos tavu on koodinvaihtomerkki 0x80, tyhjä viittaus.
+
+#### Purkava ohjelma
+
+- Purkava ohjelma käy tiedoston läpi tavu kerrallaan ja lisää kohdatut tavut puskuriin.
+- Jos tavu on koodinvaihtomerkki 0x80, luetaan viittaus.
+  - Jos viittaus on tyhjä, lisätään puskuriin koodinvaihtomerkki.
+  - Muuten luetaan puskurista viitatut tavut ja lisätään ne puskurin loppuun yksi kerrallaan.
+- Lopuksi puskurin sisältö tulostetaan.
+
+### Aikavaativuudet
+
+Koska algoritmi koostuu kolmesta sisäkkäisestä silmukasta, jotka iteroivat maksimissaan _n_, _k_ ja _n_ arvoa, missä _n_ on tiedoston koko ja _k_ on tutkittavan ympäristön koko, on algoritmin aikavaativuuden yläraja O(n²k). Vastaavasti purkamisen aikavaativuuden yläraja on O(nk).
+
+### Ohjelman kääntäminen ja suorittaminen
 
 Ohjelman voi kääntää komennolla
 
@@ -52,6 +79,8 @@ Tämän jälkeen tiedoston voi pakata ja purkaa
 
 	./compress tiedosto >tiedosto.paketti
 	./decompress tiedosto.paketti >tiedosto.pakkaamaton
+
+Ohjelmalla voi purkaa ja pakkaa minkä tahansa yhden tiedoston, joka mahtuu kokonaisena tietokoneen muistiin.
 
 ## Testaus
 
@@ -93,7 +122,9 @@ ja pärjääkin pelkkää LZ77-algoritmia paremmin tekstitiedostoja pakattaessa.
 
 ### Suorituskykytestaus
 
-Koska algoritmi koostuu kolmesta sisäkkäisestä silmukasta, jotka iteroivat maksimissaan _n_, _k_ ja _n_ arvoa, missä _n_ on tiedoston koko ja _k_ on tutkittavan ympäristön koko, on algoritmin aikavaativuuden yläraja O(n²k). Vastaavasti purkamisen aikavaativuuden yläraja on O(nk).
+Kuten ylempänä sanotaan:
+
+> Koska algoritmi koostuu kolmesta sisäkkäisestä silmukasta, jotka iteroivat maksimissaan _n_, _k_ ja _n_ arvoa, missä _n_ on tiedoston koko ja _k_ on tutkittavan ympäristön koko, on algoritmin aikavaativuuden yläraja O(n²k). Vastaavasti purkamisen aikavaativuuden yläraja on O(nk).
 
 Suorituskyvyn testaamiseksi mitattiin suoritusaika jokaisen XML-tiedoston pakkaamiselle ja purkamiselle yhteensä. Tulokset on esitetty alla olevassa kuvassa. Kuvan pystyakselilla on suoritusaika sekunneissa ja vaaka-akselilla tiedoston koko tavuissa. Kuvassa on myös pisteisiin sovitettu suora.
 

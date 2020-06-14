@@ -134,6 +134,6 @@ Kuten kuva osoittaa, suoritusaika näyttäisi olevan lineaarinen tiedoston koon 
 
 #### Vertailu gzip-ohjelmaan
 
-Alla on esitetty gzip-ohjelman pakkaamiseen ja purkamiseen käyttämä aika kunkin tekstitiedoston kohdalla samalla tavalla kuin aiemmassa kuvassa. Ohjelma pärjää erinomaisesti, eikä sen käyttämä aika vaikuta kasvavan juuri ollenkaan tiedoston koon kasvaessa.
+Alla on esitetty gzip-ohjelman pakkaamiseen ja purkamiseen käyttämä aika kunkin tekstitiedoston kohdalla samalla tavalla kuin aiemmassa kuvassa. Ohjelma pärjää erinomaisesti. Sen käyttämä minimiaika ja keskimääräinen aika näyttävät nousevan lineaarisesti suhteessa tiedoston kokoon, mutta koska isompia tiedostoja on vähän, tätä on vaikea sanoa tarkasti. Suurin osa isompien tiedostojen suoritusajoista osuu samalle vaihteluvälille kuin pienten tiedostojen suoritusajat (n. 0,005–0,015). Yksittäisillä tiedostoilla on kulunut vaihteluväliä huomattavasti suurempi aika, jopa n. 0,028, mutta otos ei ole kovin suuri.
 
 ![tulokset](xml-suorituskyky-gzip.png)

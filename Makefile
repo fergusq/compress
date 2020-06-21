@@ -9,6 +9,7 @@ decompress: src/decompress.c src/util.h
 	gcc $(CFLAGS) -o $@ $<
 
 test: all
-	cd test-files; ./test-files.sh xml-test-files; ./test-files.sh random-test-files
+	mkdir -p test/all-sizes-xml-test-files
+	cd test; ./test-files.sh xml-test-files; ./test-files.sh random-test-files; ./test-files.sh all-sizes-xml-test-files;
 
 .PHONY: all test

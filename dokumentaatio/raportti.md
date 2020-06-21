@@ -126,14 +126,16 @@ Kuten ylempänä sanotaan:
 
 > Koska algoritmi koostuu kolmesta sisäkkäisestä silmukasta, jotka iteroivat maksimissaan _n_, _k_ ja _n_ arvoa, missä _n_ on tiedoston koko ja _k_ on tutkittavan ympäristön koko, on algoritmin aikavaativuuden yläraja O(n²k). Vastaavasti purkamisen aikavaativuuden yläraja on O(nk).
 
-Suorituskyvyn testaamiseksi mitattiin suoritusaika jokaisen XML-tiedoston pakkaamiselle ja purkamiselle yhteensä. Tulokset on esitetty alla olevassa kuvassa. Kuvan pystyakselilla on suoritusaika sekunneissa ja vaaka-akselilla tiedoston koko tavuissa. Kuvassa on myös pisteisiin sovitettu suora.
+Suorituskyvyn testaamiseksi mitattiin suoritusaika jokaisen XML-tiedoston pakkaamiselle ja purkamiselle yhteensä. Tulokset on esitetty alla olevassa kuvassa. Kuvan pystyakselilla on suoritusaika sekunneissa ja vaaka-akselilla tiedoston koko tavuissa. Kuvassa on myös pisteisiin sovitettu 500 datapisteen liukuva keskiarvo.
+
+XML-tiedostoista luotiin yhdistelemällä aineisto, jossa oli mukana tasaisesti erikokoisia tiedostoja.
 
 ![tulokset](xml-suorituskyky.png)
 
-Kuten kuva osoittaa, suoritusaika näyttäisi olevan lineaarinen tiedoston koon suhteen, kun _n_ < 0,2 Mt. Tekstitiedosto-tyyppiselle datalle suoritusaika on siis hyvä.
+Kuten kuva osoittaa, suoritusaika näyttäisi olevan lineaarinen tiedoston koon suhteen, kun _n_ < 1 Mt. Tekstitiedosto-tyyppiselle datalle suoritusaika on siis hyvä.
 
 #### Vertailu gzip-ohjelmaan
 
-Alla on esitetty gzip-ohjelman pakkaamiseen ja purkamiseen käyttämä aika kunkin tekstitiedoston kohdalla samalla tavalla kuin aiemmassa kuvassa. Ohjelma pärjää erinomaisesti. Sen käyttämä minimiaika ja keskimääräinen aika näyttävät nousevan lineaarisesti suhteessa tiedoston kokoon, mutta koska isompia tiedostoja on vähän, tätä on vaikea sanoa tarkasti. Suurin osa isompien tiedostojen suoritusajoista osuu samalle vaihteluvälille kuin pienten tiedostojen suoritusajat (n. 0,005–0,015). Yksittäisillä tiedostoilla on kulunut vaihteluväliä huomattavasti suurempi aika, jopa n. 0,028, mutta otos ei ole kovin suuri.
+Alla on esitetty gzip-ohjelman pakkaamiseen ja purkamiseen käyttämä aika kunkin tekstitiedoston kohdalla samalla tavalla kuin aiemmassa kuvassa. Ohjelma pärjää erinomaisesti. Sen minimiaikavaativuus näyttää nousevan lineaarisesti, mutta pieni osa tiedostoista on vaatinut myös huomattavasti sovitetun suoran yläpuolella olevia arvoja, joten maksimiaikavaativuutta ei voida päätellä varmasti tämän testin perusteella. Keskimääräisesti aikavaativuus kuitenkin vaikuttaa lineaariselta.
 
 ![tulokset](xml-suorituskyky-gzip.png)

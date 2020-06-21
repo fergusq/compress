@@ -1,9 +1,9 @@
-# Viikkoraportti 5
+# Viikkoraportti 6
 
 ## Mitä tein
 
 - Kirjoitin vertaisarvioinnin.
-- Korjasin testausdokumenttia
+- Korjasin testausdokumenttia. Tein suorituskykytestauksen uudestaan uudella aineistolla, jossa oli mukana tasaisesti erikokoisia tiedostoja. Lisäksi sovitin suoran sijasta liukuvan keskiarvon.
 
 ## Projektin edistys
 
@@ -11,7 +11,7 @@
 
 ## Mitä opin
 
-- Opin, että kuvaajia pitää kuvailla tarkemmin
+- Miten Gnuplotilla piirretään liukuva keskiarvo
 
 ## Epäselvyydet
 
@@ -23,4 +23,4 @@
 
 ## Käytetty aika
 
-Käytin aikaa n. 2 tuntia.
+Käytin aikaa n. 4 tuntia.

@@ -6,6 +6,8 @@
 
 Ohjelma käyttää pakkausalgoritmina Lempelin ja Zivin vuonna 1977 kehittämää algoritmia, joka tunnetaan nimellä LZ77. Ohjelma toimii korvaamalla toistuvia pitkiä merkkijonoja ahneesti viittauksilla niiden aiempiin ilmentymiin.
 
+Tässä projektissa on otettu mukaan myös LZSS (Lempel–Ziv–Storer–Szymanski) -algoritmin ominaisuus, jossa viittauksia tehdään vain, jos se on kannattavaa (viittauskoodi on pienempi kuin korvattavat merkit).
+
 Algoritmin toiminta on seuraavanlainen:
 
 - Algoritmilla on parametri `k` = tutkittavan ympäristön koko
@@ -69,7 +71,7 @@ Kummankin ohjelman koodi on kattavasti kommentoitu.
 
 Koska algoritmi koostuu kolmesta sisäkkäisestä silmukasta, jotka iteroivat maksimissaan _n_, _k_ ja _n_ arvoa, missä _n_ on tiedoston koko ja _k_ on tutkittavan ympäristön koko, on algoritmin aikavaativuuden yläraja O(n²k). Vastaavasti purkamisen aikavaativuuden yläraja on O(nk).
 
-### Ohjelman kääntäminen ja suorittaminen
+## Ohjelman kääntäminen ja suorittaminen (käyttöohje)
 
 Ohjelman voi kääntää komennolla
 
@@ -139,3 +141,23 @@ Kuten kuva osoittaa, suoritusaika näyttäisi olevan lineaarinen tiedoston koon 
 Alla on esitetty gzip-ohjelman pakkaamiseen ja purkamiseen käyttämä aika kunkin tekstitiedoston kohdalla samalla tavalla kuin aiemmassa kuvassa. Ohjelma pärjää erinomaisesti. Sen minimiaikavaativuus näyttää nousevan lineaarisesti, mutta pieni osa tiedostoista on vaatinut myös huomattavasti sovitetun suoran yläpuolella olevia arvoja, joten maksimiaikavaativuutta ei voida päätellä varmasti tämän testin perusteella. Keskimääräisesti aikavaativuus kuitenkin vaikuttaa lineaariselta.
 
 ![tulokset](xml-suorituskyky-gzip.png)
+
+### Koodikattavuus
+
+Oikeellisuustestauksen koodikattavuutta ei ole laskettu. Kuitenkin arvioin, että testit kattavat koodista kaikki suorituspolut.
+
+Perustelen väitteeni sillä, että compress.c-tiedostossa on käytännössä vain kolme kohtaa, joissa koodi haarautuu:
+
+1. find_prefix_at-funktion silmukka. Silmukka suoritetaan oikeellisuustestauksessa varmasti, sillä koodi ei toimisi, jos silmukkaa ei suoritettaisi, mutta oikeellisuustestauksen mukaan koodi toimii.
+2. find_prefix-funktion silmukka. Ks. edellinen kohta.
+3. compress-funktion silmukka ja ehtolause. Silmukka kuten edellä. Ehtolauseessa on kolme vaihtoehtoa:
+	1. Viittaus voidaan luoda. Koska oikeellisuustestauksen mukaan koodi toimii ja tiedostojen koko pienenee, viittauksia luodaan.
+	2. Koodinvaihtomerkin 0x80 koodaaminen. Koska testitiedostoissa esiintyy merkki 0x80, ja se pakataan sekä puretaan oikein, suoritetaan tämäkin kohta.
+	3. Literaalin merkin koodaaminen. Vastaavasti kuin edellä, koska testitiedostoissa on muitakin merkkejä kuin merkkiä 0x80, ja ne pakataan sekä puretaan oikein, suoritetaan tämäkin kohta.
+
+Vastaavasti koska decompress.c-tiedosto toimii oikein, ja sen haaraumakohdat vastaavat compress.c-tiedoston haaraumakohtia, suoritetaan nekin kaikki.
+
+## Lähteet
+
+- LZ77 and LZ78, Wikipedia: https://en.wikipedia.org/wiki/LZ77_and_LZ78
+- Lempel–Ziv–Storer–Szymanski, Wikipedia: https://en.wikipedia.org/wiki/Lempel%E2%80%93Ziv%E2%80%93Storer%E2%80%93Szymanski
